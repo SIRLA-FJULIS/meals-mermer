@@ -4,71 +4,79 @@
 	<meta charset="utf-8">
 	<title>map_test</title>
 	<style type="text/css">
-		#mapid { 
+		#map { 
 			height: 40rem;
 			max-width: 110rem;
-			margin-right: 20%% 
+			margin-top: 5rem; 
+			margin-left: 5%;
+			margin-right: 5%;
 		}
 	</style>
-	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
-   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
-   <script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
-   integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
-   crossorigin=""></script>
 
-   <script
-  src="https://code.jquery.com/jquery-3.4.1.js"
-  integrity="sha256-WpOohJOqMqqyKL9FccASB9O0KwACQJpFTUBLTYOVvVU="
-  crossorigin="anonymous"></script>
+	<!-- CDN of leaflet -->
+	<link rel="stylesheet" href="https://unpkg.com/leaflet@1.6.0/dist/leaflet.css"
+	integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ==" crossorigin=""/>
+	<script src="https://unpkg.com/leaflet@1.6.0/dist/leaflet.js"
+	integrity="sha512-gZwIG9x3wUXg2hdXF6+rVkLF/0Vi9U8D2Ntg4Ga5I5BZpVkVxlJWbSQtXPSiUTtC0TjtGOmxa1AJPuV0CPthew=="
+	crossorigin=""></script>
+
 </head>
-<body>
+<body onload="init_map()">
 	
 	<input type="text" name="res_in" id="res_in">
-	<button onclick="loaddata()">test</button>
+	<button onclick="load_Data()">test</button>
    	<!-- map -->
-   	<div id="mapid"></div>
-
+   	<div id="try">
+   		<div id="map">地圖</div>
+   	</div>
 	<script type="text/javascript">
+
 		var resturant = {
 				res_name:"輔仁大學",
 				discript:"大學",
-				lat:"25.03931",
-				lon:"121.43291"
+				lat:"25.03516",
+				lon:"121.43215"
 			}
 
-		function loaddata(){
+		function load_Data(){
 			const words = document.getElementById("res_in").value;
-			if (words == "123") {
+			if (words == "永和豆漿") {
 				resturant.res_name = "永和豆漿";
 				resturant.discript = "不好吃";
 				resturant.lat = "25.03234";
 				resturant.lon = "121.43301";
-
-				$( "#mapid" ).load("#mapid" );
+				
+				map.remove();
+				document.getElementById('try').innerHTML = "<div id='map'></div>";
+				init_map();
 			}
 			else {
 				return window.alert(words);
 			}
-		}
+		};
 
 
 		//map data
-		var mymap = L.map('mapid').setView([resturant.lat, resturant.lon], 16);
-		var marker = L.marker([resturant.lat, resturant.lon]).addTo(mymap);
-
 		var title_address = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
 		var attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
 
-		var Popup = '<b>' + resturant.res_name + '</b><br/>' + resturant.discript;
+		function init_map(){
+			var id = document.getElementById('map');
+			var mymap = new L.map(id, {
+				center: [resturant.lat, resturant.lon],
+				zoom: 17
+			});
+			var marker = L.marker([resturant.lat, resturant.lon]).addTo(mymap);
+			var Popup = '<b>' + resturant.res_name + '</b><br/>' + resturant.discript;
 
-		L.tileLayer(title_address, {
-			maxZoom: 19,
-			attribution: attribution,
-		}).addTo(mymap);
+			L.tileLayer(title_address, {
+				maxZoom: 19,
+				attribution: attribution,
+			}).addTo(mymap);
 
-		marker.bindPopup(Popup).openPopup();
-
+			marker.bindPopup(Popup).openPopup();
+		}
 
 	</script>
-<!--mapbox://styles/sheep-of-block/ck4nses6e4otx1cmu3o4t2ry8-->
+</body>
 </html>
