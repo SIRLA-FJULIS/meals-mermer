@@ -1,0 +1,153 @@
+#mapid { 
+    height: 240px;
+    max-width: 240px;
+    margin-left: 30%;
+    margin-top: 20%;
+}
+
+#choice {
+    z-index:4;
+    position:absolute;
+    top:7%;
+    left:10%;
+    width:200px; 
+    height:40px;
+    line-height: 55px;
+    font-size: 15px; 
+    color: #5f5f5f;
+}
+#telluser {
+    z-index:4;
+    position:absolute;
+    top:14%;
+    left:10%;
+    width:200px; 
+    height:50px;
+    color: white;
+}
+
+#again {
+    z-index:4;
+    border:0;
+    background: #557d8b;
+    color: #ffffff;
+    font-size: 15px;
+    position:absolute;
+    top:45%;
+    left:60%;
+    width: 100px;
+    height: 40px;
+    border-radius: 10px;
+}
+
+#bg {
+    z-index:1;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background-color:rgb(83, 71, 65);
+}
+
+#baji {
+    z-index:3;
+    position:absolute;
+    top:-140px;
+    left:26%;
+}
+#bgwhite {
+    z-index:2;
+    width: 400px;
+    height: 30px;
+    background-color:white;
+    position:absolute;
+    top:100px;
+    left:37%;
+}
+
+#inner-container {
+    z-index:2;
+    animation: myMove;
+    animation-timing-function:linear;
+    animation-duration:1.5s;
+    animation-fill-mode: forwards;
+    animation-iteration-count: 3;
+    position:absolute;
+    top:86px;
+    left:40%;
+    animation-play-state:paused;
+}
+
+/*文字無縫滾動*/
+@keyframes myMove {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-381px);
+    }
+}
+
+#result {
+    z-index:4;
+    color:rgb(83, 71, 65);
+    position:absolute;
+    left: 50%;
+    top: 60%;
+    transition-delay:0;/*動畫延遲時間設定*/
+}
+
+#circle {
+    z-index:3;
+    width: 100px;
+    height: 100px;
+    background: rgb(238, 179, 98);
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    position:absolute;
+    animation-name:cir;
+    animation-duration:2s;
+    top:25px;
+    right:250px;
+    animation-play-state: paused;
+}
+@keyframes cir{
+    from{
+        top:20px;
+    }
+    to{
+        top:180px;
+    }
+}
+#barectangle {
+    z-index:3;
+    width: 20px;
+    height: 60px;
+    background: rgb(238, 179, 98);
+    position:absolute;
+    right: 290px;
+    top: 100px;
+    animation-name:rec;
+    animation-delay: 0.2s;
+    animation-duration:1.8s;
+    animation-play-state: paused;
+}
+@keyframes rec{
+    from{
+        top:100px;
+    }
+    to{
+        top:162px;
+    }
+}
+#baline {
+    z-index:3;
+    width: 120px;
+    height: 20px;
+    background: rgb(238, 179, 98);
+    position:absolute;
+    right: 290px;
+    top: 145px;
+}
