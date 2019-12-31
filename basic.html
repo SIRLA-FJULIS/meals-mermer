@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>輔大碎碎念三餐</title>
+        <link rel="stylesheet" href="js_project.css">
+    </head>
+    <!--bgcolor="black" <div id="bg"></div>-->
+    <body> 
+        <button id="again" onclick="window.location.reload();">再來一次</button>
+        <div id="bg"></div>
+        <div>
+            <select id="choice" v-model="text" onchange="GetValue()">
+                <option>請選擇</option>
+                <option>早餐</option>
+                <option>午、晚餐</option>
+                <option>點心</option>
+            </select>
+            <p id="telluser">選擇的類型：{{text}}</p>
+        </div>
+        <div id="bgtest"></div>
+        <img id="baji" src="/images/2.png"></img>
+        <div id=bgwhite></div>
+        <div id="circle" onclick ="Run()"></div>
+        <div id="baline"></div>
+        <div id="barectangle" onclick ="Run()"></div>
+        <div id="inner-container" onclick ="Run()">
+            <p v-for="text in arr">{{ text }}</p>
+            <p>{{ result1 }}</p>
+        </div>
+        <div id=result onclick ="Run()">
+            <p>電話：{{ result2 }}</p>
+            <p>地址：{{ result3 }}</p>
+        </div>
+
+        <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+        <script>
+            let i = "";
+            function Run(){
+                document.getElementById("circle").style.animationPlayState = "running";
+                document.getElementById("barectangle").style.animationPlayState = "running";
+                document.getElementById("inner-container").style.animationPlayState = "running";
+                document.getElementById("result").style.color = "white";
+                document.getElementById("result").style.transitionDelay = "4.8s";
+                //document.getElementById("loading").style.WebkitAnimationPlayState = "paused";
+            }
+            function GetValue(){
+                i = document.getElementById("choice").value;
+                const n = Math.floor(Math.random()*2);
+                st.text = i;
+                console.log(i==="點心");
+                if (i==="早餐"){
+                    k = foods1;
+                    //a.arr = k.map(item => Object.values(item)[0]);
+                    a.result1 = k[n].name;
+                    b.result2 = k[n].phone;
+                    b.result3 = k[n].address;
+                }else if (i==="午、晚餐"){
+                    k = foods2;
+                    //a.arr = k.map(item => Object.values(item)[0]);
+                    a.result1 = k[n].name;
+                    b.result2 = k[n].phone;
+                    b.result3 = k[n].address;
+                }else if (i==="點心"){
+                    k = foods3;
+                    //a.arr = k.map(item => Object.values(item)[0]);
+                    a.result1 = k[n].name;
+                    b.result2 = k[n].phone;
+                    b.result3 = k[n].address;
+                }
+
+            }
+            var name = "";
+            var phone = "";
+            var address = "";
+            const foods1 = [{name:"靴子義大利餐館 輔大店",phone:"02 2906 8820",address:"新北市新莊區中正路593號"},
+                {name:"麥當勞",phone:"02 2902 2181",address:"新北市新莊區中正路617號"},
+                {name:"吉野家輔大店",phone:"02 2904 7056",address:"新北市新莊區中正路516之4號"}];
+
+            const foods2 = [{name:"摩斯漢堡 新莊輔大店",phone:"02 2901 9576",address:"新北市新莊區中正路516-5號"},
+                {name:"荷亞輕食館輔大店",phone:"02 2906 9991",address:"新北市新莊區中正路603號"},
+                {name:"新濟州韓式豆腐鍋(輔大店)",phone:"02 2902 0555",address:"新北市新莊區中正路516之6號"}];
+                
+            const foods3 = [{name:"HWC黑沃咖啡 新北輔大店",phone:"02 2908 5951",address:"新北市新莊區中正路595號"},
+                {name:"韓莊",phone:"02 2906 1899",address:"新北市新莊區中正路500號"},
+                {name:"甜蛙雪花冰",phone:"02 2901 8852",address:"新北市新莊區中正路494號"},
+                {name:"Goodday加州墨西哥餐廳 輔大旗艦店",phone:"02 2901 5658",address:"新北市新莊區中正路488號2樓"}];
+
+            var a = new Vue({
+                el:'#inner-container',
+                data:{
+                    arr: ["靴子義大利餐館 輔大店","麥當勞",
+                    "吉野家輔大店","摩斯漢堡 新莊輔大店",
+                    "荷亞輕食館輔大店","新濟州韓式豆腐鍋(輔大店)",
+                    "HWC黑沃咖啡 新北輔大店","韓莊","甜蛙雪花冰",
+                    "Goodday加州墨西哥餐廳 輔大旗艦店"],
+                    result1: name,
+                }
+            });
+
+            var b = new Vue({
+                el:'#result',
+                data:{
+                    result2: phone,
+                    result3: address,
+                }
+            });
+
+            var st = new Vue({
+                el: '#telluser',
+                data:{
+                    text:"未選擇",
+                }
+            })
+        </script>
+    </body>
+</html>
