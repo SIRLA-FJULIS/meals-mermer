@@ -23,14 +23,20 @@
 </head>
 <body onload="init_map()">
 	
+	<!-- use for input the String to find data (load_data()) -->
 	<input type="text" name="res_in" id="res_in">
 	<button onclick="load_Data()">test</button>
+   	
+
    	<!-- map -->
    	<div id="try">
    		<div id="map">地圖</div>
    	</div>
+
+   	
 	<script type="text/javascript">
 
+		//default resturant data
 		var resturant = {
 				res_name:"輔仁大學",
 				discript:"大學",
@@ -38,17 +44,19 @@
 				lon:"121.43215"
 			}
 
+		//input those data to show in map
 		function load_Data(){
 			const words = document.getElementById("res_in").value;
 			if (words == "永和豆漿") {
-				resturant.res_name = "永和豆漿";
-				resturant.discript = "不好吃";
-				resturant.lat = "25.03234";
-				resturant.lon = "121.43301";
+				resturant.res_name = "永和豆漿"; //pop-up title
+				resturant.discript = "不好吃"; //pop-up discription
+				resturant.lat = "25.03234"; //lat: y-cood
+				resturant.lon = "121.43301"; //lon: x-cood
 				
+				//Reset the map
 				map.remove();
 				document.getElementById('try').innerHTML = "<div id='map'></div>";
-				init_map();
+				init_map(); //rander the map
 			}
 			else {
 				return window.alert(words);
@@ -56,24 +64,32 @@
 		};
 
 
-		//map data
-		var title_address = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
-		var attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+		//content of map and it's frame
+		var title_address = 'https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png' //map content: OSM map (default style)
+		var attribution = '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors' // map's frame String
 
+		//initial map
 		function init_map(){
 			var id = document.getElementById('map');
+			//initial map coordinate and zoom
 			var mymap = new L.map(id, {
 				center: [resturant.lat, resturant.lon],
 				zoom: 17
 			});
+			
+			//Marker
 			var marker = L.marker([resturant.lat, resturant.lon]).addTo(mymap);
+			
+			//Pop-up String --> "<b>title of resturant</b> <br/>discript of resturant"
 			var Popup = '<b>' + resturant.res_name + '</b><br/>' + resturant.discript;
 
+			//Map config
 			L.tileLayer(title_address, {
-				maxZoom: 19,
-				attribution: attribution,
+				maxZoom: 19, //the max-Zoom of the map
+				attribution: attribution, //attribution must show in open source software
 			}).addTo(mymap);
 
+			//Pop-up
 			marker.bindPopup(Popup).openPopup();
 		}
 
